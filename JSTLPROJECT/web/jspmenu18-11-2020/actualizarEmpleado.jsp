@@ -32,7 +32,7 @@
             if (conexion != null) {
                 Empleado empleado = new Empleado(Integer.parseInt(sId.trim()), sNombre.trim(), Float.parseFloat(sSalario.trim()));
                 if (oc.actualizarEmpleado(empleado)) {
-                    out.println("ACTUALIZAR OK");
+                    out.println("INSERT OK");
                 } else {
                     out.println("ERROR AL REGISTRAR");
                 }

@@ -122,7 +122,7 @@ public class OperacionesCrud {
         try {
             Statement sql = conexion.createStatement();
             x = sql.executeUpdate(query);
-            bandera = true;
+            bandera=true;
         } catch (SQLException ex) {
             bandera = false;
         }
