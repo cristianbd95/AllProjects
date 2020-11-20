@@ -224,6 +224,14 @@ public class Main {
         } else {
             System.out.println("ERROR CONEXION");
         }
+        System.out.println("=======MEDICO A JSON=======");
+        if (conexion != null) {
+            oc.tablaMysqlToJsonMedico("salud", "consulta");
+
+            System.out.println("CONEXION CORRECTA");
+        } else {
+            System.out.println("ERROR CONEXION");
+        }
         
     }
     

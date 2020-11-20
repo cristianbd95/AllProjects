@@ -343,12 +343,12 @@ public class OperacionesCrud implements Operaciones {
             ps = conexion.prepareCall(query);
             rs = ps.executeQuery();
             while (rs.next()) {
-                json = "{\n"
-                        + "id: " + rs.getInt(1) + ",\n"
-                        + "nombre: " + rs.getString(2) + ",\n"
-                        + "apellidos: " + rs.getString(3) + ",\n"
-                        + "grupo: " + rs.getString(4) + ",\n"
-                        + "fecha_nac: " + rs.getDate(5) + "\n"
+                json += "{\n"
+                        + "\"id:\" \"" + rs.getInt(1) + "\",\n"
+                        + "\"nombre:\" \"" + rs.getString(2) + "\",\n"
+                        + "\"apellidos:\" \"" + rs.getString(3) + "\",\n"
+                        + "\"grupo:\" \"" + rs.getString(4) + "\",\n"
+                        + "\"fecha_nac:\" \"" + rs.getDate(5) + "\"\n"
                         + "}";
             }
             ps.close();
@@ -362,6 +362,34 @@ public class OperacionesCrud implements Operaciones {
     @Override
     public String tablaMysqlToXml(String database, String table) {
         String query = "SELECT * FROM " + database + "." + table + ";";
+        String xml = null;
+        
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            ps = conexion.prepareCall(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                xml += "<alumno>\n"
+                        + "<id> " + rs.getInt(1) + "</id>\n"
+                        + "<nombre> " + rs.getString(2) + "</nombre>\n"
+                        + "<apellidos> " + rs.getString(3) + "</apellidos>\n"
+                        + "<grupo> " + rs.getString(4) + "</grupo>\n"
+                        + "<fecha_nac> " + rs.getDate(5) + "</fecha_nac>\n"
+                        + "</alumno>";
+            }
+            ps.close();
+            System.out.println(xml);
+        } catch (SQLException ex) {
+            System.out.println("error");
+        }
+        return xml;
+    }
+
+    @Override
+    public String tablaMysqlToJsonMedico(String database, String table) {
+        String query = "SELECT * FROM " + database + "." + table + ";";
         String json = null;
         
         PreparedStatement ps = null;
@@ -371,13 +399,13 @@ public class OperacionesCrud implements Operaciones {
             ps = conexion.prepareCall(query);
             rs = ps.executeQuery();
             while (rs.next()) {
-                json = "<alumno>\n"
-                        + "<id> " + rs.getInt(1) + "</id>\n"
-                        + "<nombre> " + rs.getString(2) + "</nombre>\n"
-                        + "<apellidos> " + rs.getString(3) + "</apellidos>\n"
-                        + "<grupo> " + rs.getString(4) + "</grupo>\n"
-                        + "<fecha_nac> " + rs.getDate(5) + "</fecha_nac>\n"
-                        + "</alumno>";
+                json += "{\n"
+                        + "\"numeroConsulta:\" \"" + rs.getString(1) + "\",\n"
+                        + "\"fecha:\" \"" + rs.getDate(2) + "\",\n"
+                        + "\"nombreMedico:\" \"" + rs.getString(3) + "\",\n"
+                        + "\"deinpr:\" \"" + rs.getString(4) + "\",\n"
+                        + "\"procedencia:\" \"" + rs.getString(5) + "\"\n"
+                        + "}\n";
             }
             ps.close();
             System.out.println(json);

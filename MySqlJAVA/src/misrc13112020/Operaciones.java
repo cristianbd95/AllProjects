@@ -36,5 +36,7 @@ public interface Operaciones {
     public String tablaMysqlToJson(String database, String table);
     
     public String tablaMysqlToXml(String database, String table);
+    
+    public String tablaMysqlToJsonMedico(String database, String table);
 
 }
