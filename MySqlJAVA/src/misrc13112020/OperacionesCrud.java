@@ -169,7 +169,7 @@ public class OperacionesCrud implements Operaciones {
         try {
             PreparedStatement sql = conexion.prepareStatement(query);
             x = sql.executeUpdate();
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(OperacionesCrud.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -225,7 +225,7 @@ public class OperacionesCrud implements Operaciones {
             ps = conexion.prepareStatement(query);
             rs = ps.executeQuery();
             while (rs.next()) {
-                
+
                 tablas_al.add(rs.getString(1));
             }
             ps.close();
@@ -249,7 +249,7 @@ public class OperacionesCrud implements Operaciones {
             ps = conexion.prepareStatement(query);
             rs = ps.executeQuery();
             while (rs.next()) {
-                
+
                 tablas_al.add(rs.getString(1));
             }
             ps.close();
@@ -265,81 +265,126 @@ public class OperacionesCrud implements Operaciones {
     public List<String> obtenerTodasColumnasTablaAlumno() {
         List<String> columns_al = new ArrayList<String>();
         String query = "Show columns FROM alumno;";
-        
+
         PreparedStatement ps = null;
         ResultSet rs = null;
-        
+
         try {
             ps = conexion.prepareCall(query);
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 columns_al.add(rs.getString(1));
             }
             ps.close();
         } catch (SQLException ex) {
-            columns_al=null;
+            columns_al = null;
             System.out.println("error");
         }
-        
+
         return columns_al;
-        
-        
+
     }
 
     @Override
     public List<String> obtenerTodasTablasDadoBaseDatos(String database) {
-         List<String> columns_al = new ArrayList<String>();
-        String query = "SELECT table_name FROM information_schema.tables WHERE table_schema = '"+database+"';";
-        
+        List<String> columns_al = new ArrayList<String>();
+        String query = "SELECT table_name FROM information_schema.tables WHERE table_schema = '" + database + "';";
+
         PreparedStatement ps = null;
         ResultSet rs = null;
-        
+
         try {
             ps = conexion.prepareCall(query);
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 columns_al.add(rs.getString(1));
             }
             ps.close();
         } catch (SQLException ex) {
-            columns_al=null;
+            columns_al = null;
             System.out.println("error");
         }
-        
+
         return columns_al;
     }
 
     @Override
     public List<String> obtenerTodasColumnasDadoTabla(String tabla) {
         List<String> columns_al = new ArrayList<String>();
-        String query = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'BD0001' AND TABLE_NAME = '"+tabla+"';;";
-        
+        String query = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'BD0001' AND TABLE_NAME = '" + tabla + "';;";
+
         PreparedStatement ps = null;
         ResultSet rs = null;
-        
+
         try {
             ps = conexion.prepareCall(query);
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 columns_al.add(rs.getString(1));
             }
             ps.close();
         } catch (SQLException ex) {
-            columns_al=null;
+            columns_al = null;
             System.out.println("error");
         }
-        
+
         return columns_al;
     }
 
     @Override
     public String tablaMysqlToJson(String database, String table) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String query = "SELECT * FROM " + database + "." + table + ";";
+        String json = null;
+        
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            ps = conexion.prepareCall(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                json = "{\n"
+                        + "id: " + rs.getInt(1) + ",\n"
+                        + "nombre: " + rs.getString(2) + ",\n"
+                        + "apellidos: " + rs.getString(3) + ",\n"
+                        + "grupo: " + rs.getString(4) + ",\n"
+                        + "fecha_nac: " + rs.getDate(5) + "\n"
+                        + "}";
+            }
+            ps.close();
+            System.out.println(json);
+        } catch (SQLException ex) {
+            System.out.println("error");
+        }
+        return json;
     }
 
     @Override
     public String tablaMysqlToXml(String database, String table) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String query = "SELECT * FROM " + database + "." + table + ";";
+        String json = null;
+        
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            ps = conexion.prepareCall(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                json = "<alumno>\n"
+                        + "<id> " + rs.getInt(1) + "</id>\n"
+                        + "<nombre> " + rs.getString(2) + "</nombre>\n"
+                        + "<apellidos> " + rs.getString(3) + "</apellidos>\n"
+                        + "<grupo> " + rs.getString(4) + "</grupo>\n"
+                        + "<fecha_nac> " + rs.getDate(5) + "</fecha_nac>\n"
+                        + "</alumno>";
+            }
+            ps.close();
+            System.out.println(json);
+        } catch (SQLException ex) {
+            System.out.println("error");
+        }
+        return json;
     }
 
 }

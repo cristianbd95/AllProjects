@@ -28,9 +28,9 @@
                 <TR><TD ALIGN=left><PRE><A HREF="crearTabla.jsp">(1) CREAR TABLA               </A><BR></PRE></TD></TR>
                 <TR><TD ALIGN=left><PRE><A HREF="insertarRegistro.jsp">(2) REGISTRAR             </A><BR></PRE></TD></TR>
                 <TR><TD ALIGN=left><PRE><A HREF="mostrarEmpleado.jsp">(3) MOSTRAR                 </A><BR></PRE></TD></TR>
-                <TR><TD ALIGN=left><PRE><A HREF="buscarGUI.jsp">(4) BUSCAR                   </A><BR></PRE></TD></TR> 
-                <TR><TD ALIGN=left><PRE><A HREF="eliminarGUI.jsp">(5) ELIMINAR               </A><BR></PRE></TD></TR> 
-                <TR><TD ALIGN=left><PRE><A HREF="actualizarGUI.jsp">(6) ACTUALIZAR           </A><BR></PRE></TD></TR>      
+                <TR><TD ALIGN=left><PRE><A HREF="buscarEmpleado.jsp">(4) BUSCAR                   </A><BR></PRE></TD></TR> 
+                <TR><TD ALIGN=left><PRE><A HREF="eliminarEmpleado.jsp">(5) ELIMINAR               </A><BR></PRE></TD></TR> 
+                <TR><TD ALIGN=left><PRE><A HREF="actualizarEmpleado.jsp">(6) ACTUALIZAR           </A><BR></PRE></TD></TR>      
                 <TR><TD ALIGN=left><PRE><A HREF="javascript:close()">(7) SALIR               </A><BR></PRE></TD></TR>  
 
               </TABLE>
