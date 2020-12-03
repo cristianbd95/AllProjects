@@ -19,9 +19,9 @@ public class Conexion1 {
     private String url;
 
     public Conexion1(boolean flag) {
-        this.database = "BD0001";
+        this.database = "salud";
         setUrl();
-        setConexion(flag, "BD0001");
+        setConexion(flag, "salud");
     }
 
     public Conexion1(boolean flag, String database) {

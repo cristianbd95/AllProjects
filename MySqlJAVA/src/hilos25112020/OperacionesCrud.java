@@ -46,4 +46,29 @@ public class OperacionesCrud {
         return consultas_al;
 
     }
+    
+    public String tablaMysqlToJsonMedico(String database, String table) {
+        String query = "select * from consulta;";
+        String json = null;
+        
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            ps = conexion.prepareCall(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                json += "\n"+rs.getString(1)+"\n"+
+                        rs.getDate(2)+"\n"+
+                        rs.getString(3)+"\n"+
+                        rs.getString(4)+"\n"+
+                        rs.getString(5)+"\n";
+            }
+            ps.close();
+            System.out.println(json);
+        } catch (SQLException ex) {
+            System.out.println("error");
+        }
+        return json;
+    }
 }

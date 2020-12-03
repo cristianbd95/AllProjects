@@ -12,12 +12,12 @@ public class Aficionado {
     Date fechanacimiento;
     String ciudad;
     String estadocivil;
-    List<Aficionado> aficionado_al = new ArrayList<Aficionado>();
+    List<String> aficionado_al = new ArrayList<String>();
 
     public Aficionado() {
     }
 
-    public Aficionado(int idaficionado, String nombre, Date fechanacimiento, String ciudad, String estadocivil, List<Aficionado> aficionado_al) {
+    public Aficionado(int idaficionado, String nombre, Date fechanacimiento, String ciudad, String estadocivil, List<String> aficionado_al) {
         this.idaficionado = idaficionado;
         this.nombre = nombre;
         this.fechanacimiento = fechanacimiento;
@@ -66,11 +66,11 @@ public class Aficionado {
         this.estadocivil = estadocivil;
     }
 
-    public List<Aficionado> getAficionado_al() {
+    public List<String> getAficionado_al() {
         return aficionado_al;
     }
 
-    public void setAficionado_al(List<Aficionado> aficionado_al) {
+    public void setAficionado_al(List<String> aficionado_al) {
         this.aficionado_al = aficionado_al;
     }
 
