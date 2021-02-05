@@ -1,4 +1,5 @@
 
+<%@page import="entidades.Cliente"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="factoria2.Consulta1"%>
 <%@page import="java.util.List"%>
@@ -24,8 +25,7 @@
         HttpSession misession = request.getSession(true);
         String logeado = (String) misession.getAttribute("logeado");
         if (request.getParameter("btoEnviar") != null) {
-            List<Object[]> consultas_al = (ArrayList<Object[]>) request.getAttribute("EnvioDatos");
-            Object[] objeto = new Object[4];
+            List<Cliente> consultas_al = (ArrayList<Cliente>) request.getAttribute("EnvioDatos");
             if (consultas_al != null) {
                 out.println("<center><table style='border: 2px solid black'>");
                 out.println("<tr>");
@@ -35,12 +35,9 @@
                 out.println("<th>REGION </th>");
                 out.println("</tr>");
                 for (int i = 0; i < consultas_al.size(); i++) {
-                    objeto = consultas_al.get(i);
+                    Cliente cliente = consultas_al.get(i);
                     out.println("<tr>");
-                    out.println("<td>" + objeto[0] + "</td>");
-                    out.println("<td>" + objeto[1] + "</td>");
-                    out.println("<td>" + objeto[2] + "</td>");
-                    out.println("<td>" + objeto[3] + "</td>");
+                    out.println("<td>" + cliente.getIdCliente() + "</td>");
                     out.println("</tr>");
                 }
                 out.println("</table></center>");

@@ -5,10 +5,12 @@
  */
 package dispatcher;
 
+import entidades.Cliente;
 import factoria2.Conexion;
 import factoria2.Consulta1;
 import factoria2.Consulta2;
 import factoria2.ConsultasCrud;
+import factoria2.OperacionesJPA;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -29,13 +31,16 @@ public class Consultas extends HttpServlet {
             Connection conexion = c.getConexion();
             ConsultasCrud cc = new ConsultasCrud();
 
-            List<Object[]> consultas_al = cc.obtenerConsultasSinClase(conexion);
             List<Consulta2> consultas2_al = cc.obtenerConsulta2(conexion);
+            
+            OperacionesJPA oj = new OperacionesJPA();
+            
+            List<Cliente> clientes_al = oj.BuscarTodosClientes();
 
             String boton = request.getParameter("btoEnviar");
             if (boton.equals("Enviar")) {
-                if (consultas_al != null) {
-                    request.setAttribute("EnvioDatos", consultas_al);
+                if (clientes_al != null) {
+                    request.setAttribute("EnvioDatos", clientes_al);
                     request.getRequestDispatcher("/dispatcher/consulta1.jsp?control=llego").forward(request, response);
                 } else {
                     out.println("ERROR CONSULTA");
