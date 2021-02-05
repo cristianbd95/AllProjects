@@ -27,12 +27,6 @@ public class Consultas extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 
-            Conexion c = new Conexion(true);
-            Connection conexion = c.getConexion();
-            ConsultasCrud cc = new ConsultasCrud();
-
-            List<Consulta2> consultas2_al = cc.obtenerConsulta2(conexion);
-            
             OperacionesJPA oj = new OperacionesJPA();
             
             List<Cliente> clientes_al = oj.BuscarTodosClientes();
@@ -42,14 +36,6 @@ public class Consultas extends HttpServlet {
                 if (clientes_al != null) {
                     request.setAttribute("EnvioDatos", clientes_al);
                     request.getRequestDispatcher("/dispatcher/consulta1.jsp?control=llego").forward(request, response);
-                } else {
-                    out.println("ERROR CONSULTA");
-                }
-            }
-            if (boton.equals("Enviar consulta")) {
-                if (consultas2_al != null) {
-                    request.setAttribute("EnvioDatos", consultas2_al);
-                    request.getRequestDispatcher("/dispatcher/consulta2.jsp?control=llego").forward(request, response);
                 } else {
                     out.println("ERROR CONSULTA");
                 }

@@ -29,14 +29,14 @@ public class Consultas extends HttpServlet {
             Connection conexion = c.getConexion();
             ConsultasCrud cc = new ConsultasCrud();
 
-            List<Consulta1> consultas_al = cc.obtenerConsulta1(conexion);
+            List<Object[]> consultas_al = cc.obtenerConsultasSinClase(conexion);
             List<Consulta2> consultas2_al = cc.obtenerConsulta2(conexion);
 
             String boton = request.getParameter("btoEnviar");
             if (boton.equals("Enviar")) {
                 if (consultas_al != null) {
                     request.setAttribute("EnvioDatos", consultas_al);
-                    request.getRequestDispatcher("/dispatcher/consulta1.jsp").forward(request, response);
+                    request.getRequestDispatcher("/dispatcher/consulta1.jsp?control=llego").forward(request, response);
                 } else {
                     out.println("ERROR CONSULTA");
                 }
@@ -44,7 +44,7 @@ public class Consultas extends HttpServlet {
             if (boton.equals("Enviar consulta")) {
                 if (consultas2_al != null) {
                     request.setAttribute("EnvioDatos", consultas2_al);
-                    request.getRequestDispatcher("/dispatcher/consulta2.jsp").forward(request, response);
+                    request.getRequestDispatcher("/dispatcher/consulta2.jsp?control=llego").forward(request, response);
                 } else {
                     out.println("ERROR CONSULTA");
                 }

@@ -1,8 +1,3 @@
-<%-- 
-    Document   : producto
-    Created on : 22-ene-2021, 10:34:10
-    Author     : Campus FP
---%>
 
 <%@page import="java.util.ArrayList"%>
 <%@page import="factoria2.Consulta1"%>
@@ -29,6 +24,34 @@
         HttpSession misession = request.getSession(true);
         String logeado = (String) misession.getAttribute("logeado");
         if (request.getParameter("btoEnviar") != null) {
+            List<Object[]> consultas_al = (ArrayList<Object[]>) request.getAttribute("EnvioDatos");
+            Object[] objeto = new Object[4];
+            if (consultas_al != null) {
+                out.println("<center><table style='border: 2px solid black'>");
+                out.println("<tr>");
+                out.println("<th>ID VENDEDOR </th>");
+                out.println("<th>CIUDAD </th>");
+                out.println("<th>VENDEDOR </th>");
+                out.println("<th>REGION </th>");
+                out.println("</tr>");
+                for (int i = 0; i < consultas_al.size(); i++) {
+                    objeto = consultas_al.get(i);
+                    out.println("<tr>");
+                    out.println("<td>" + objeto[0] + "</td>");
+                    out.println("<td>" + objeto[1] + "</td>");
+                    out.println("<td>" + objeto[2] + "</td>");
+                    out.println("<td>" + objeto[3] + "</td>");
+                    out.println("</tr>");
+                }
+                out.println("</table></center>");
+            } else {
+                out.println("ARRAY NULL");
+            }
+        }
+
+        /*HttpSession misession = request.getSession(true);
+        String logeado = (String) misession.getAttribute("logeado");
+        if (request.getParameter("btoEnviar") != null) {
             List<Consulta1> consultas_al = (ArrayList<Consulta1>) request.getAttribute("EnvioDatos");
             if (consultas_al != null) {
                 out.println("<center><table style='border: 2px solid black'>");
@@ -51,7 +74,7 @@
             } else {
                 out.println("ARRAY NULL");
             }
-        }
+        }*/
     %>
 </body>
 </html>

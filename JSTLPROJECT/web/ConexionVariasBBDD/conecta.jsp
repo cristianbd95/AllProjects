@@ -11,7 +11,8 @@
 
 <%
     String sRadioButton = request.getParameter("bbdd");
-    
+
+    session.setAttribute("radio_s", sRadioButton);
 
     Conexion c = null;
     Connection conexion = null;
@@ -19,9 +20,8 @@
     OperacionesCrud oc = new OperacionesCrud();
 
     String database = "C:\\universidad\\mydatabase.universidad";
-    out.println(sRadioButton);
-    
-    switch ("Mysql") {
+
+    switch (sRadioButton) {
         case "Mysql":
             c = new ConexionMysql(true);
             break;
@@ -30,49 +30,17 @@
             break;
         case "Sqlite3":
             c = new ConexionSqlite(database);
+            c.setConexion(true);
             break;
     }
-    c.setConexion(true);
+
     conexion = c.getConexion();
-    
-    if(request.getParameter("btoMostrar") != null){
-        session.setAttribute("radioButton_s", sRadioButton);
-        out.println(sRadioButton);
-        if (conexion != null) {
-            if (oc.mostrarAlumno(conexion) != null) {
-                out.println("<table border='1'>");
-                out.println("<tr>");
-                List<Alumno> alumnos_al = oc.mostrarAlumno(conexion);
-                for (int i = 0; i < alumnos_al.size(); i++) {
-                    Alumno alumno = alumnos_al.get(i);
 
-                    out.println("<th>ID</th>");
-                    out.println("<th>NOMBRE Y APELLIDOS</th>");
-                    out.println("<th>CARRERA</th>");
-                    out.println("<th>DIRECCIÓN</th>");
-                    out.println("<th>EMAIL</th>");
-                    out.println("<th>EDAD</th>");
-                    out.println("<th>TELEFONO</th>");
-                    out.println("</tr>");
-                    out.println("<tr>");
-                    out.println("<td>" + alumno.getId()+ "</td>");
-                    out.println("<td>" + alumno.getNombresApellidos()+ "</td>");
-                    out.println("<td>" + alumno.getCarrera() + "</td>");
-                    out.println("<td>" + alumno.getDireccion() + "</td>");
-                    out.println("<td>" + alumno.getEmail() + "</td>");
-                    out.println("<td>" + alumno.getEdad() + "</td>");
-                    out.println("<td>" + alumno.getTelefono() + "</td>");
-                }
-                out.println("</tr>");
-                out.println("</table>");
-            } else {
-                out.println("ERROR MÉTODO MOSTRAR");
-            }
-        } else {
-            out.println("ERROR CONEXION");
-        }
-    }
+    if (conexion == null) {
+        System.out.println("no hay conexion");
+    } 
 
+        if (oc.existeTabla(conexion)) {
 %>
 <!DOCTYPE html>
 <html>
@@ -81,9 +49,38 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="conecta.jsp" method="post">
-            
+        <form action="operacionesBBDD.jsp" method="post">
+            <center>
+                <fieldset style="width: 180px; margin-top: 100px;">
+                    <legend>Alumno:</legend>
+                    <input type="text" name="txtId" placeholder="Introduzca id" required><br>
+                    <input type="text" name="txtNombre" placeholder="Introduzca nombre y apellidos" required><br>
+                    <input type="text" name="txtCarrera" placeholder="Introduzca carrera" required><br>
+                    <input type="text" name="txtDireccion" placeholder="Introduzca dirección" required><br>
+                    <input type="text" name="txtEmail" placeholder="Introduzca email" required><br>
+                    <input type="text" name="txtEdad" placeholder="Introduzca edad" required><br>
+                    <input type="text" name="txtTelefono" placeholder="Introduzca teléfono" required><br>
+                    <input type="submit" name="btoInsertar" value="INSERT">
+
+                </fieldset>
+
+        </form>
+        <br>
+        <form action="operacionesBBDD.jsp" method="post">
             <input type="submit" name="btoMostrar" value="MOSTRAR">
         </form>
-    </body>
-</html>
+    </center>
+</body>
+</html><center>
+    <%
+    } else {
+        out.println("LA TABLA NO ESTÁ CREADA, DEBERÁ CREARLA");
+    %>
+    <form action="index.jsp" method="post">
+        <input type="submit" name="btoCrearTabla" value="Crear tabla">
+    </form>
+</center>
+<%
+        }
+    
+%>

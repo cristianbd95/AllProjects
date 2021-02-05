@@ -1,7 +1,10 @@
 
 package misrcFuncionario;
 
+public abstract class Funcionario {
 
-public class Funcionario {
+    
+    public abstract double Salario();
+    
     
 }

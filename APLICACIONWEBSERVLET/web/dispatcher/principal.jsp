@@ -9,10 +9,10 @@
     </head>
     <body>
         Estas logeado como ${usuario.getNombre()} <br><br>
-        <a href="Controlador?direccion=consulta1" target="myFrame">Consulta1</a>
-        <a href="Controlador?direccion=consulta2" target="myFrame">Consulta2</a>
-        <a href="Controlador?direccion=consulta3" target="myFrame">Cliente</a>
-        <a href="Controlador?direccion=consulta4" target="myFrame">Nueva venta</a>
+        <a href="Controlador?direccion=consulta1" target="myFrame">Crear</a>
+        <a href="Controlador?direccion=consulta2" target="myFrame">Leer</a>
+        <a href="Controlador?direccion=consulta3" target="myFrame">Actualizar</a>
+        <a href="Controlador?direccion=consulta4" target="myFrame">Eliminar</a>
         <div style="heigth:500px; width: 700px">
             <iframe name="myFrame" style="height: 500px; width: 100%;">
                 

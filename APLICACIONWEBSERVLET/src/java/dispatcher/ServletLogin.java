@@ -2,6 +2,7 @@ package dispatcher;
 
 import factoria2.Conexion;
 import factoria2.OperacionCrud;
+import factoria2.OperacionesJPA;
 import factoria2.Vendedor;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,9 +22,7 @@ public class ServletLogin extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        Conexion c = new Conexion(true);
-        Connection conexion = c.getConexion();
-        OperacionCrud oc = new OperacionCrud(conexion);
+        OperacionesJPA oc = new OperacionesJPA();
         String accion = request.getParameter("accion");
         if (accion.equalsIgnoreCase("Enviar")) {
             String login = request.getParameter("txtLogin");

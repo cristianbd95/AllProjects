@@ -3,6 +3,8 @@ package misrcConexionBBDD;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ConexionSqlite extends Conexion{
 
@@ -16,7 +18,9 @@ public class ConexionSqlite extends Conexion{
     public void setConexion(boolean bandera) {
         try {
             if (bandera == true) {
+                Class.forName("org.sqlite.JDBC");
                 conexion = DriverManager.getConnection("jdbc:sqlite:" + url);
+                
                 if (conexion != null) {
                     System.out.println("CONEXION EXITOSA");
                 }
@@ -26,6 +30,8 @@ public class ConexionSqlite extends Conexion{
         } catch (SQLException ex) {
             conexion = null;
             System.out.println("SQLEXCEPTION --> ERROR EN ABRIR\\CERRAR CONEXION");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ConexionSqlite.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

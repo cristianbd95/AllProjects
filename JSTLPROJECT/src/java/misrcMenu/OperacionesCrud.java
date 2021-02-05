@@ -129,4 +129,32 @@ public class OperacionesCrud {
         return bandera;
 
     }
+    
+    public List<Medico> obtenerTodosLosMedicos() {
+        List<Medico> medicos_al = new ArrayList<Medico>();
+        String query = "select * from consulta;";
+
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            ps = conexion.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Medico medico = new Medico(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5));
+                medicos_al.add(medico);
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            medicos_al = null;
+        }
+
+        return medicos_al;
+
+    }
 }

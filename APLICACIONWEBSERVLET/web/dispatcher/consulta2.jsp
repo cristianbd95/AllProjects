@@ -1,8 +1,3 @@
-<%-- 
-    Document   : cliente
-    Created on : 22-ene-2021, 10:34:21
-    Author     : Campus FP
---%>
 
 <%@page import="factoria2.Consulta2"%>
 <%@page import="java.util.ArrayList"%>
@@ -54,5 +49,5 @@
             }
         }
     %>
-</body>
+    </body>
 </html>

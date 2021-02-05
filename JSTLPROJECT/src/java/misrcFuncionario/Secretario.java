@@ -1,14 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package misrcFuncionario;
 
-/**
- *
- * @author Campus FP
- */
-public class Secretario {
+public class Secretario extends Funcionario implements Autorizacion{
     
+    public int clave;
+
+    @Override
+    public double Salario() {
+        return 5000;
+    }
+    
+    public int getClave(int claveBD){
+        return claveBD;
+    }
+
+    @Override
+    public boolean autorizado(int clave, int claveBD) {
+        if(getClave(claveBD) != clave){
+            return false;
+        }
+        return true;
+    }
+
+
 }

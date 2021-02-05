@@ -47,6 +47,11 @@ public class Articulo implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "articulo")
     private List<Articuloxfactura> articuloxfacturaList;
 
+    public Articulo(String descripcion, double precioUnitario){
+        this.descripcion = descripcion;
+        this.precioUnitario = precioUnitario;
+    }
+    
     public Articulo() {
     }
 
