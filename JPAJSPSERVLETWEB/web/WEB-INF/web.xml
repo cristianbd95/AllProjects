@@ -50,7 +50,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServletLogin</servlet-name>
-        <url-pattern>/ServletL</url-pattern>
+        <url-pattern>/ServletLogin</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServletBienvenida</servlet-name>

@@ -1,4 +1,5 @@
 
+<%@page import="entidades.Cliente"%>
 <%@page import="factoria2.Consulta2"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="factoria2.Consulta1"%>
@@ -15,39 +16,21 @@
     <br><center>
         <p>Estas logeado como <strong style="color:red">${logeado}</strong></p> <br><br>
 
-        Listar cada uno de  los vendedores y la ciudad y region en donde trabajan.<br>
-        <form action="http://localhost:8080/SERVLET/Consultas" method="post"><br>
-            <input type="submit" name="btoEnviar" value="Enviar consulta">
+        Busque el cliente que quiera actualizar<br>
+        <form action="http://localhost:8080/JPAJSPSERVLETWEB/Consultas" method="post"><br>
+            Introduzca ID<input type="number" name="numId2">
+            <input type="submit" name="btoEnviar3" value="Buscar Cliente">
         </form>
     </center>
     <br><br><br>
     <%
         HttpSession misession = request.getSession(true);
         String logeado = (String) misession.getAttribute("logeado");
-        if (request.getParameter("btoEnviar") != null) {
-            List<Consulta2> consultas_al = (ArrayList<Consulta2>) request.getAttribute("EnvioDatos");
-            if (consultas_al != null) {
-                out.println("<center><table style='border: 2px solid black'>");
-                out.println("<tr>");
-                out.println("<th>ID PEDIDO </th>");
-                out.println("<th>IMPORTE </th>");
-                out.println("<th>NOMBRE </th>");
-                out.println("<th>EMPRESA </th>");
-                out.println("</tr>");
-                for (int i = 0; i < consultas_al.size(); i++) {
-                    Consulta2 consulta = consultas_al.get(i);
-                    out.println("<tr>");
-                    out.println("<td>" + consulta.getIdPedido() + "</td>");
-                    out.println("<td>" + consulta.getImporte() + "</td>");
-                    out.println("<td>" + consulta.getNombre() + "</td>");
-                    out.println("<td>" + consulta.getEmpresa() + "</td>");
-                    out.println("</tr>");
-                }
-                out.println("</table></center>");
-            } else {
-                out.println("ARRAY NULL");
-            }
+        if( request.getParameter("btoEnviar3")!= null ){
+            Cliente cliente = (Cliente) request.getAttribute("EnvioDatos2");
+            out.println("ID: " + cliente.getIdCliente() + "<br>IdVendedor" + cliente.getIdVendedor().getIdVendedor() + "<br>Empresa:" + cliente.getEmpresa());
         }
-    %>
-    </body>
+    %> 
+    
+</body>
 </html>

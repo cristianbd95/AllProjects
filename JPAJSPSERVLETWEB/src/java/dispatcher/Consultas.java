@@ -25,20 +25,55 @@ public class Consultas extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        List<String> clientes_al;
         try (PrintWriter out = response.getWriter()) {
 
             OperacionesJPA oj = new OperacionesJPA();
-            
-            List<Cliente> clientes_al = oj.BuscarTodosClientes();
 
             String boton = request.getParameter("btoEnviar");
-            if (boton.equals("Enviar")) {
+            String boton2 = request.getParameter("btoEnviar2");
+            String boton3 = request.getParameter("btoEnviar3");
+
+            if (boton != null) {
+                //List<Cliente> clientes_al = oj.BuscarTodosClientes2();
+                clientes_al = oj.BuscarTodosClientes2();
+                System.out.println("ENTRO");
                 if (clientes_al != null) {
-                    request.setAttribute("EnvioDatos", clientes_al);
+                    System.out.println("ENTRO CLIENTES LLENO");
+                    request.setAttribute("EnvioDatos1", clientes_al);
+                    System.out.println(clientes_al.get(0));
+                    request.getRequestDispatcher("dispatcher/consulta1.jsp?control=llego").forward(request, response);
+                } else {
+                    out.println("ERROR CONSULTA");
+                }
+            } else {
+                System.out.println("NO TRAE VALOR");
+            }
+
+            if (boton2 != null) {
+                int id = Integer.parseInt(request.getParameter("numId"));
+                Cliente cliente = oj.buscar(id);
+                if (cliente != null) {
+                    request.setAttribute("EnvioDatos", cliente);
                     request.getRequestDispatcher("/dispatcher/consulta1.jsp?control=llego").forward(request, response);
                 } else {
                     out.println("ERROR CONSULTA");
                 }
+            } else {
+                out.println("NO SE HA ENCONTRADO ESE CLIENTE");
+            }
+
+            if (boton3 != null) {
+                int id = Integer.parseInt(request.getParameter("numId2"));
+                Cliente cliente = oj.buscar(id);
+                if (cliente != null) {
+                    request.setAttribute("EnvioDatos2", cliente);
+                    request.getRequestDispatcher("/dispatcher/consulta2.jsp?control=llego").forward(request, response);
+                } else {
+                    out.println("ERROR CONSULTA");
+                }
+            } else {
+                out.println("NO SE HA ENCONTRADO ESE CLIENTE");
             }
 
         }

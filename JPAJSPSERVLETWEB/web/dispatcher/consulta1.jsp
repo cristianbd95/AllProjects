@@ -1,4 +1,5 @@
 
+<%@page import="factoria2.OperacionesJPA"%>
 <%@page import="entidades.Cliente"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="factoria2.Consulta1"%>
@@ -14,64 +15,46 @@
     <body>
     <br><center>
         <p>Estas logeado como <strong style="color:red">${logeado}</strong></p> <br><br>
-
-        Listar cada uno de  los vendedores y la ciudad y region en donde trabajan.<br>
-        <form action="http://localhost:8080/SERVLET/Consultas" method="post"><br>
+        <p>Buscar Cliente Por Id.</p>
+        <form action="http://localhost:8080/JPAJSPSERVLETWEB/Consultas" method="post"><br>
+            Introduzca ID<input type="number" name="numId">
+            <input type="submit" name="btoEnviar2" value="Buscar Cliente">
+        </form>
+        <form action="http://localhost:8080/JPAJSPSERVLETWEB/Consultas" method="post"><br>
             <input type="submit" name="btoEnviar" value="Enviar">
         </form>
     </center>
     <br><br><br>
     <%
+
         HttpSession misession = request.getSession(true);
         String logeado = (String) misession.getAttribute("logeado");
-        if (request.getParameter("btoEnviar") != null) {
-            List<Cliente> consultas_al = (ArrayList<Cliente>) request.getAttribute("EnvioDatos");
-            if (consultas_al != null) {
-                out.println("<center><table style='border: 2px solid black'>");
-                out.println("<tr>");
-                out.println("<th>ID VENDEDOR </th>");
-                out.println("<th>CIUDAD </th>");
-                out.println("<th>VENDEDOR </th>");
-                out.println("<th>REGION </th>");
-                out.println("</tr>");
-                for (int i = 0; i < consultas_al.size(); i++) {
-                    Cliente cliente = consultas_al.get(i);
-                    out.println("<tr>");
-                    out.println("<td>" + cliente.getIdCliente() + "</td>");
-                    out.println("</tr>");
-                }
-                out.println("</table></center>");
-            } else {
-                out.println("ARRAY NULL");
-            }
+        if (request.getParameter("btoEnviar2") != null) {
+            Cliente cliente = (Cliente) request.getAttribute("EnvioDatos");
+            out.println("ID: " + cliente.getIdCliente() + "<br>IdVendedor" + cliente.getIdVendedor().getIdVendedor() + "<br>Empresa:" + cliente.getEmpresa());
         }
 
-        /*HttpSession misession = request.getSession(true);
-        String logeado = (String) misession.getAttribute("logeado");
         if (request.getParameter("btoEnviar") != null) {
-            List<Consulta1> consultas_al = (ArrayList<Consulta1>) request.getAttribute("EnvioDatos");
+            List<String> consultas_al = (ArrayList<String>) request.getAttribute("EnvioDatos1");
             if (consultas_al != null) {
                 out.println("<center><table style='border: 2px solid black'>");
                 out.println("<tr>");
+                out.println("<th>ID </th>");
+                out.println("<th>NOMBRE </th>");
                 out.println("<th>ID VENDEDOR </th>");
-                out.println("<th>CIUDAD </th>");
-                out.println("<th>VENDEDOR </th>");
-                out.println("<th>REGION </th>");
+                out.println("<th>LIMITE CREDITO </th>");
                 out.println("</tr>");
                 for (int i = 0; i < consultas_al.size(); i++) {
-                    Consulta1 consulta = consultas_al.get(i);
                     out.println("<tr>");
-                    out.println("<td>" + consulta.getIdVendedor() + "</td>");
-                    out.println("<td>" + consulta.getVendedor() + "</td>");
-                    out.println("<td>" + consulta.getCiudad() + "</td>");
-                    out.println("<td>" + consulta.getRegion() + "</td>");
+                    out.println("<td>" + consultas_al.get(i) + "</td>");
                     out.println("</tr>");
                 }
                 out.println("</table></center>");
+
             } else {
-                out.println("ARRAY NULL");
+                out.println("error");
             }
-        }*/
+        }
     %>
 </body>
 </html>
