@@ -33,9 +33,9 @@
             Cliente cliente = (Cliente) request.getAttribute("EnvioDatos");
             out.println("ID: " + cliente.getIdCliente() + "<br>IdVendedor" + cliente.getIdVendedor().getIdVendedor() + "<br>Empresa:" + cliente.getEmpresa());
         }
-
+        OperacionesJPA oj = new OperacionesJPA();
         if (request.getParameter("btoEnviar") != null) {
-            List<String> consultas_al = (ArrayList<String>) request.getAttribute("EnvioDatos1");
+            List<Cliente> consultas_al = oj.BuscarTodosClientes();
             if (consultas_al != null) {
                 out.println("<center><table style='border: 2px solid black'>");
                 out.println("<tr>");
@@ -45,8 +45,12 @@
                 out.println("<th>LIMITE CREDITO </th>");
                 out.println("</tr>");
                 for (int i = 0; i < consultas_al.size(); i++) {
+                    Cliente cliente = consultas_al.get(i);
                     out.println("<tr>");
-                    out.println("<td>" + consultas_al.get(i) + "</td>");
+                    out.println("<td>" + cliente.getIdCliente() + "</td>");
+                    out.println("<td>" + cliente.getIdVendedor().getIdVendedor() + "</td>");
+                    out.println("<td>" + cliente.getEmpresa() + "</td>");
+                    out.println("<td>" + cliente.getLimiteCredito() + "</td>");
                     out.println("</tr>");
                 }
                 out.println("</table></center>");
