@@ -25,7 +25,7 @@ public class Consultas extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        List<String> clientes_al;
+        List<Cliente> clientes_al;
         try (PrintWriter out = response.getWriter()) {
 
             OperacionesJPA oj = new OperacionesJPA();
@@ -36,7 +36,7 @@ public class Consultas extends HttpServlet {
 
             if (boton != null) {
                 //List<Cliente> clientes_al = oj.BuscarTodosClientes2();
-                clientes_al = oj.BuscarTodosClientes2();
+                clientes_al = oj.BuscarTodosClientes();
                 System.out.println("ENTRO");
                 if (clientes_al != null) {
                     System.out.println("ENTRO CLIENTES LLENO");
