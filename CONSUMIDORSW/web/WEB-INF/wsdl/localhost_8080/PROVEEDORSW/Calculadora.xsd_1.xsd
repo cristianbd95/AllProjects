@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown. --><xs:schema xmlns:tns="http://psw/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://psw/">
+
+<xs:element name="calculadora" type="tns:calculadora"/>
+
+<xs:element name="calculadoraResponse" type="tns:calculadoraResponse"/>
+
+<xs:element name="hello" type="tns:hello"/>
+
+<xs:element name="helloResponse" type="tns:helloResponse"/>
+
+<xs:element name="operation" type="tns:operation"/>
+
+<xs:element name="operationResponse" type="tns:operationResponse"/>
+
+<xs:complexType name="operation">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="operationResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:transaccion" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="transaccion">
+<xs:sequence>
+<xs:element name="fechaAlta" type="xs:string" minOccurs="0"/>
+<xs:element name="fechaVenta" type="xs:string" minOccurs="0"/>
+<xs:element name="operacion" type="xs:string" minOccurs="0"/>
+<xs:element name="precioVenta" type="xs:int"/>
+<xs:element name="provincia" type="xs:string" minOccurs="0"/>
+<xs:element name="referencia" type="xs:int"/>
+<xs:element name="superficie" type="xs:int"/>
+<xs:element name="tipo" type="xs:string" minOccurs="0"/>
+<xs:element name="vendedor" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="calculadora">
+<xs:sequence>
+<xs:element name="numero1" type="xs:double"/>
+<xs:element name="numero2" type="xs:double"/>
+<xs:element name="operacion" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="calculadoraResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="hello">
+<xs:sequence>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="helloResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
